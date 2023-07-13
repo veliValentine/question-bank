@@ -1,0 +1,30 @@
+.start-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.start-container h1 {
+  padding: 10px;
+  text-align: left;
+}
+
+.start-container label {
+  padding: 10px;
+  text-align: left;
+}
+
+.start-container textarea {
+  margin: 10px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.start-container button {
+  padding: 10px;
+  margin: 10px;
+  margin-left: 40%;
+  margin-right: 40%;
+  border-radius: 5px;
+}
