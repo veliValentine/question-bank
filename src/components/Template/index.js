@@ -2,10 +2,11 @@ import { useState } from 'react'
 import './Template.css'
 
 const Template = ({
+  template,
   saveTemplate,
   notifyError,
 }) => {
-  const [text, setText] = useState('')
+  const [text, setText] = useState(JSON.stringify(template))
   const onSubmit = () => {
     try {
       const template = JSON.parse(text);
