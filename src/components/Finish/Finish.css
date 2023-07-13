@@ -1,0 +1,24 @@
+.finish-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.finish-container h1 {
+  text-align: left;
+}
+
+.finish-container textarea {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.finish-container button {
+  padding: 10px;
+  margin: 10px;
+  margin-left: 40%;
+  margin-right: 40%;
+  border-radius: 5px;
+}
