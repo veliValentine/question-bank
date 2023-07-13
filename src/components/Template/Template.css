@@ -6,17 +6,16 @@
 }
 
 .start-container h1 {
-  padding: 10px;
   text-align: left;
 }
 
 .start-container label {
-  padding: 10px;
   text-align: left;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .start-container textarea {
-  margin: 10px;
   height: 100%;
   border-radius: 10px;
 }
