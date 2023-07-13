@@ -5,7 +5,8 @@ const NavBar = ({
 }) => {
   return (
     <div className='navbar-container'>
-      <span>Flying Valentine Question Generator Tool</span>
+      <h4>Flying Valentine</h4>
+      <span>Question Generator Tool</span>
       {NavButtons(pageNavigator)}
     </div>
   )
@@ -13,11 +14,11 @@ const NavBar = ({
 
 const NavButtons = (pageNavigator) => (
   <div className='button-container'>
-    <button onClick={pageNavigator.start}>
-      Start
-    </button>
     <button onClick={pageNavigator.add}>
       Add Questions
+    </button>
+    <button onClick={pageNavigator.template}>
+      Add Template
     </button>
     <button onClick={pageNavigator.finish}>
       Finish
