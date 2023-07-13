@@ -5,6 +5,7 @@
   text-align: center;
 }
 
-span {
-  font-size: small;
+.footer-container p {
+  font-size: x-small;
+  padding: 5px;
 }

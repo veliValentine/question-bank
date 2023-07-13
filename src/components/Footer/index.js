@@ -5,7 +5,7 @@ const Footer = () => {
   const copyrightYears = currentYear === 2023 ? '2023' : `2023-${currentYear}`
   return (
     <div className='footer-container'>
-      <span>Copyright {copyrightYears} by N.J.Valentine and The Flying Valentine</span>
+      <p>Copyright {copyrightYears} by N.J.Valentine and The Flying Valentine</p>
     </div>
   )
 }
