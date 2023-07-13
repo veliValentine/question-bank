@@ -5,6 +5,8 @@ import './App.css'; // https://colorhunt.co/palette/0719520b666a35a29f97feed
 import Template from '../Template';
 import Finish from '../Finish';
 import Questions from '../Questions';
+import useNotification from '../../hooks/useNotification';
+import Notification from '../Notification';
 
 const PAGES = {
   TEMPLATE: 'template',
@@ -13,10 +15,13 @@ const PAGES = {
 }
 
 const App = () => {
+  const [errorNotification, updateError, clearError] = useNotification(5000);
   const [page, setPage] = useState(PAGES.TEMPLATE);
   const [template, setTemplate] = useState({})
 
-  const notifyError = (message) => console.error(message)
+  const notifyError = (message) => {
+    updateError(message)
+  }
 
   const saveTemplate = (template) => {
     setTemplate(template)
@@ -47,6 +52,7 @@ const App = () => {
   return (
     <div className='app-container'>
       <NavBar pageNavigator={pageNavigator} />
+      <Notification text={errorNotification} clear={clearError} isError={true} />
       <div className='content-container'>
         {choosePage(page)}
       </div>
