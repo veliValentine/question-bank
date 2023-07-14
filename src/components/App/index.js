@@ -26,6 +26,7 @@ const App = () => {
 
   const saveTemplate = (template) => {
     setTemplate(template)
+    setPage(PAGES.ADD)
   }
 
   const choosePage = (page) => {
