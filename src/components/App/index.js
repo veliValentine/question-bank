@@ -7,6 +7,7 @@ import Finish from '../Finish';
 import Questions from '../Questions';
 import useNotification from '../../hooks/useNotification';
 import Notification from '../Notification';
+import useTemplate from '../../hooks/useTemplate';
 
 const PAGES = {
   TEMPLATE: 'template',
@@ -16,8 +17,8 @@ const PAGES = {
 
 const App = () => {
   const [errorNotification, updateError, clearError] = useNotification(5000);
-  const [page, setPage] = useState(PAGES.TEMPLATE);
-  const [template, setTemplate] = useState({})
+  const [page, setPage] = useState(PAGES.ADD);
+  const [template, setTemplate] = useTemplate()
 
   const notifyError = (message) => {
     updateError(message)
