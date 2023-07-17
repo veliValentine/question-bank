@@ -20,9 +20,9 @@ const Template = ({
   return (
     <div className='start-container'>
       <h1>Add Template</h1>
-      <label for="template">Add topics as JSON with or without questions to get started</label>
+      <label htmlFor="template">Add topics as JSON with or without questions to get started</label>
       <textarea id="template" value={text} onChange={(e) => setText(e.target.value)} />
-      <label for="submit">Submit when ready</label>
+      <label htmlFor="submit">Submit when ready</label>
       <button id="submit" onClick={onSubmit}>Submit</button>
     </div>
   )
