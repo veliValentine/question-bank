@@ -29,19 +29,30 @@ const App = () => {
     setPage(PAGES.ADD)
   }
 
+  const updateTemplate = (newTemplate) => {
+    setTemplate(newTemplate)
+  }
+
   const choosePage = (page) => {
     switch (page) {
       case PAGES.ADD:
-        return <Questions />
+        return (
+          <Questions
+            template={template}
+            updateTemplate={updateTemplate}
+          />
+        )
       case PAGES.FINISH:
         return <Finish result={template} />
       case PAGES.TEMPLATE:
       default:
-        return <Template
-          template={template}
-          notifyError={notifyError}
-          saveTemplate={saveTemplate}
-        />
+        return (
+          <Template
+            template={template}
+            notifyError={notifyError}
+            saveTemplate={saveTemplate}
+          />
+        )
     }
   }
 
