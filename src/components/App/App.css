@@ -9,7 +9,10 @@
 
 .content-container {
   background-color: white;
-  color: black;
+  overflow: hidden;
+  min-height: 60%;
+  background-color: #0B666A;
+  color: whitesmoke;
   display: flex;
   align-items: stretch;
   flex-direction: column;
