@@ -20,8 +20,20 @@ const Questions = ({
 
   const onAddQuestion = ({ title, answers = [] }) => {
     const newQuestions = [...questions, { title, answers }]
-    const oldTopic = template[topic]
-    const newTopic = { ...oldTopic, questions: newQuestions }
+    updateTopicQuestions(newQuestions)
+  }
+
+  const onAddAnswer = ({ title, answer }) => {
+    const oldQuestions = template[topic].questions
+    const oldQuestion = oldQuestions.find(({ title: oldTitle }) => oldTitle === title)
+    const newAnswers = oldQuestion.answers.concat(answer)
+    const newQuestion = { ...oldQuestion, answers: newAnswers }
+    const newQuestions = oldQuestions.map((question) => question.title === title ? newQuestion : question)
+    updateTopicQuestions(newQuestions)
+  }
+
+  const updateTopicQuestions = (newQuestions) => {
+    const newTopic = { ...template[topic], questions: newQuestions }
     const newTemplate = { ...template, [topic]: newTopic }
     updateTemplate(newTemplate)
   }
@@ -30,7 +42,16 @@ const Questions = ({
     <div className='questions-page-container'>
       <h1>Modify Questions</h1>
       <SelectTopics topics={topcis} topic={topic} setTopic={setTopic} />
-      {topic === '' ? null : <ShowQuestions topic={topic} onAddQuestion={onAddQuestion} questions={questions} />}
+      {topic === ''
+        ? null
+        : (
+          <ShowQuestions
+            topic={topic}
+            questions={questions}
+            onAddQuestion={onAddQuestion}
+            onAddAnswer={onAddAnswer}
+          />)
+      }
     </div>
   )
 }
@@ -38,13 +59,20 @@ const Questions = ({
 const ShowQuestions = ({
   topic,
   questions,
-  onAddQuestion
+  onAddQuestion,
+  onAddAnswer
 }) => {
   return (
     <div className='show-questions'>
       <h3>{topic.toUpperCase()}</h3>
       <div className='questions-container'>
-        {questions.map(Question)}
+        {questions.map(({ title, answers }) => (
+          <Question key={title}
+            title={title}
+            answers={answers}
+            onAddAnswer={onAddAnswer}
+          />
+        ))}
       </div>
       <NewQuestion onAddQuestion={onAddQuestion} />
     </div>
@@ -71,12 +99,55 @@ const SelectTopics = ({ topics, topic, setTopic }) => {
   )
 }
 
-const Question = ({ title, answers = {} }) => {
+const Question = ({ title, answers = {}, onAddAnswer }) => {
+  const [newAnswer, setNewAnswer] = useState('')
+  const [isCorrect, setIsCorrect] = useState(false)
+
+  const handleAnswerChange = (e) => {
+    setNewAnswer(e.target.value)
+  }
+
+  const handleCorrectnessChange = (e) => {
+    setIsCorrect(e.target.value)
+  }
+
+  const onSubmit = () => {
+    const validNewAnswer = newAnswer.trim()
+    if (validNewAnswer === '') {
+      return
+    }
+    const validIsCorrect = isCorrect === 'true' ? true : false
+    const answer = { choice: validNewAnswer, isCorrect: validIsCorrect }
+    onAddAnswer({ title, answer })
+  }
+
   return (
     <div key={title} className='question-container'>
       <h5>{title}</h5>
       <div className='answers-container'>
         {answers.map(QuestionAnswer)}
+      </div>
+      <div className='new-answer-container'>
+        <label htmlFor='new-answer'>Add answer: </label>
+        <input value={newAnswer} id='new-answer' onChange={handleAnswerChange} />
+        <input
+          name='is-correct'
+          id='false-option'
+          type='radio'
+          defaultChecked={true}
+          value={false}
+          onClick={handleCorrectnessChange}
+        />
+        <label htmlFor='false-option'>false</label>
+        <input
+          name='is-correct'
+          id='true-option'
+          type='radio'
+          value={true}
+          onClick={handleCorrectnessChange}
+        />
+        <label htmlFor='true-option'>true</label>
+        <button onClick={onSubmit} type='button' disabled={newAnswer.trim() === ''}>Add</button>
       </div>
     </div>
   )
