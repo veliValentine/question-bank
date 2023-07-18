@@ -10,6 +10,9 @@ const Template = ({
   const onSubmit = () => {
     try {
       const template = JSON.parse(text);
+      if (typeof template !== 'object' || Array.isArray(template)) {
+        throw new SyntaxError('Template must be an object')
+      }
       saveTemplate(template)
     } catch (error) {
       if (error instanceof SyntaxError) {
