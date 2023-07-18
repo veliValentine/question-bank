@@ -1,0 +1,23 @@
+.notification-container {
+  position: absolute;
+  margin: 20px;
+  padding: 10px;
+  width: max-content;
+  display: flex;
+  right: 0px;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 10px;
+}
+
+.error {
+  background-color: red;
+  color: black;
+}
+
+.notification-container button {
+  background-color: #ffffff;
+  opacity: .4;
+  align-self: center;
+  margin-left: 20px;
+}
