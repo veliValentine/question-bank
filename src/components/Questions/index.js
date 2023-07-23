@@ -5,12 +5,16 @@ const Questions = ({
   template,
   updateTemplate
 }) => {
-  const [topcis, setTopics] = useState([])
+  const [topics, setTopics] = useState([])
   const [topic, setTopic] = useState('')
   const [questions, setQuestions] = useState([])
 
   useEffect(() => {
-    setTopics(Object.keys(template))
+    const topics = Object.keys(template)
+    setTopics(topics)
+    if (topics.length === 1) {
+      setTopic(topics[0])
+    }
   }, [template])
 
 
@@ -41,7 +45,7 @@ const Questions = ({
   return (
     <div className='questions-page-container'>
       <h1>Modify Questions</h1>
-      <SelectTopics topics={topcis} topic={topic} setTopic={setTopic} />
+      <SelectTopics topics={topics} topic={topic} setTopic={setTopic} />
       {topic === ''
         ? null
         : (
@@ -119,10 +123,12 @@ const Question = ({ title, answers = {}, onAddAnswer }) => {
     const validIsCorrect = isCorrect === 'true' ? true : false
     const answer = { choice: validNewAnswer, isCorrect: validIsCorrect }
     onAddAnswer({ title, answer })
+    setNewAnswer('')
+    setIsCorrect(false)
   }
 
   return (
-    <div key={title} className='question-container'>
+    <div className='question-container'>
       <h5>{title}</h5>
       <div className='answers-container'>
         {answers.map(QuestionAnswer)}
@@ -131,23 +137,23 @@ const Question = ({ title, answers = {}, onAddAnswer }) => {
         <label htmlFor='new-answer'>Add answer: </label>
         <input value={newAnswer} id='new-answer' onChange={handleAnswerChange} />
         <input
-          name='is-correct'
-          id='false-option'
+          name={`is-correct-${title}`}
+          id={`false-option-${title}`}
           type='radio'
           defaultChecked={true}
           value={false}
           onClick={handleCorrectnessChange}
         />
-        <label htmlFor='false-option'>false</label>
+        <label htmlFor={`false-option-${title}`}>false</label>
         <input
-          name='is-correct'
-          id='true-option'
+          name={`is-correct-${title}`}
+          id={`true-option-${title}`}
           type='radio'
           value={true}
           onClick={handleCorrectnessChange}
         />
-        <label htmlFor='true-option'>true</label>
-        <button onClick={onSubmit} type='button' disabled={newAnswer.trim() === ''}>Add</button>
+        <label htmlFor={`true-option-${title}`}>true</label>
+        <button onClick={onSubmit} type='submit' disabled={newAnswer.trim() === ''}>Add</button>
       </div>
     </div>
   )
